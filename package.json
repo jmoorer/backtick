@@ -38,10 +38,6 @@
 		"@codemirror/view": "^6.42.1",
 		"codemirror": "^6.0.2",
 		"markdown-it": "^14.1.1",
-		"rehype-stringify": "^10.0.1",
-		"remark-parse": "^11.0.0",
-		"remark-rehype": "^11.1.2",
-		"svelte-splitpanes": "^8.0.12",
-		"unified": "^11.0.5"
+		"svelte-splitpanes": "^8.0.12"
 	}
 }

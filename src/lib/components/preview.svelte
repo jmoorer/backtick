@@ -1,18 +1,10 @@
 <script lang="ts">
   let { markdown }: { markdown: string } = $props();
-  import rehypeStringify from "rehype-stringify";
-  import remarkParse from "remark-parse";
-  import remarkRehype from "remark-rehype";
-  import { unified } from "unified";
-  // import { marked } from "marked";
+
   import MarkdownIt from "markdown-it";
 
   const md = new MarkdownIt();
 
-  const processor = unified()
-    .use(remarkParse)
-    .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeStringify);
   //let html = $derived(processor.processSync(markdown).toString());
   let html = $derived(md.render(markdown));
 
