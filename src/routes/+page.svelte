@@ -9,6 +9,7 @@
 
   import toast, { Toaster } from "svelte-french-toast";
   import { delay } from "$lib/utils";
+  import { createScrollSync } from "$lib/state/scroll.svelte";
 
   let pasteForm = $state<PasteFormData>({
     content: EXAMPLE_MARKDOWN,
@@ -32,6 +33,7 @@
     await delay(1000); // Simulate API delay
     toast.success("Paste published successfully");
   }
+  let scrollContext = createScrollSync();
 </script>
 
 {#snippet header(name: string)}
@@ -46,13 +48,13 @@
   <Pane minSize={20}>
     <div class="flex flex-col h-full bg-ink-800">
       {@render header("Markdown")}
-      <Editor bind:text={pasteForm.content} />
+      <Editor {scrollContext} bind:text={pasteForm.content} />
     </div>
   </Pane>
   <Pane minSize={20}>
     <div class="flex flex-col h-full bg-ink-800">
       {@render header("Preview")}
-      <Preview markdown={pasteForm.content} />
+      <Preview markdown={pasteForm.content} {scrollContext} />
     </div>
   </Pane>
 </Splitpanes>

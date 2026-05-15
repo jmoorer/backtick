@@ -1,11 +1,16 @@
 <script lang="ts">
-  let { text = $bindable<string>() } = $props();
-
   import { EditorView } from "@codemirror/view";
   import { markdown } from "@codemirror/lang-markdown";
 
   import { basicSetup } from "codemirror";
   import { onMount } from "svelte";
+  import type { ScrollContext } from "$lib/state/scroll.svelte";
+
+  type Props = {
+    text?: string;
+    scrollContext: ScrollContext;
+  };
+  let { text = $bindable<string>(), scrollContext }: Props = $props();
   let editorElement: HTMLElement;
   let containerElement: HTMLElement;
 
@@ -42,9 +47,14 @@
         text = view.state.doc.toString();
       },
     });
+    scrollContext.syncScroll(view.scrollDOM);
+    scrollContext.followScroll(view.scrollDOM);
   });
 </script>
 
-<div bind:this={containerElement} class="flex-1">
+<div bind:this={containerElement} class="flex-1 relative">
   <div bind:this={editorElement}></div>
+  <!-- <span class="absolute bottom-1 right-2 text-xs text-slate-500">
+    {scrollContext.scrollPosition.x}, {scrollContext.scrollPosition.y}
+  </span> -->
 </div>
