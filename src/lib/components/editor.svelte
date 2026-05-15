@@ -16,13 +16,7 @@
     if (!editorElement) {
       throw new Error("Element not found");
     }
-    new ResizeObserver(() => {
-      const height = containerElement.clientHeight;
-      console.log({ height });
-      view.dispatch({
-        effects: [],
-      });
-    }).observe(containerElement);
+
     const height = containerElement.clientHeight;
 
     const view = new EditorView({

@@ -36,8 +36,11 @@
 	"dependencies": {
 		"@codemirror/lang-markdown": "^6.5.0",
 		"@codemirror/view": "^6.42.1",
+		"bits-ui": "^2.18.1",
 		"codemirror": "^6.0.2",
 		"markdown-it": "^14.1.1",
-		"svelte-splitpanes": "^8.0.12"
+		"svelte-french-toast": "^1.2.0",
+		"svelte-splitpanes": "^8.0.12",
+		"zod": "^4.4.3"
 	}
 }

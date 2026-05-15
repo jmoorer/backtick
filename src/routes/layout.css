@@ -71,56 +71,6 @@
   --animate-cursor: cursor 1s steps(1) infinite;
 }
 
-/* ─── Light mode color overrides ────────────────────────────── */
-@layer theme {
-  @media (prefers-color-scheme: light) {
-    :root {
-      --color-ink-950: #f8f9fa; /* page bg */
-      --color-ink-900: #f0f1f5; /* inset · code block backgrounds */
-      --color-ink-800: #ffffff; /* app background */
-      --color-ink-700: #f5f6f9; /* card */
-      --color-ink-600: #eff0f5; /* hovered card / nav chrome */
-      --color-ink-500: #e5e8f0; /* border */
-      --color-ink-400: #d9dce8; /* border-strong · dividers */
-
-      --color-slate-100: #1a1a1a; /* fg · body text */
-      --color-slate-200: #3a3a3a; /* fg-soft */
-      --color-slate-400: #6b7280; /* fg-dim · labels, captions */
-      --color-slate-500: #9ca3af; /* fg-faint · gutter, placeholder */
-      --color-slate-600: #d1d5db; /* fg-mute · barely visible hints */
-
-      --color-cyan-950: #ecf7f9; /* readable text on cyan bg */
-
-      --shadow-card: 0 1px 0 0 rgb(0 0 0 / 0.03), 0 0 0 1px rgb(0 0 0 / 0.02);
-      --shadow-raised: 0 4px 16px rgb(0 0 0 / 0.1), 0 0 0 1px rgb(0 0 0 / 0.03);
-      --shadow-overlay:
-        0 30px 80px rgb(0 0 0 / 0.15), 0 0 0 1px rgb(103 232 249 / 0.1);
-    }
-  }
-
-  [data-theme="light"] {
-    --color-ink-950: #f8f9fa;
-    --color-ink-900: #f0f1f5;
-    --color-ink-800: #ffffff;
-    --color-ink-700: #f5f6f9;
-    --color-ink-600: #eff0f5;
-    --color-ink-500: #e5e8f0;
-    --color-ink-400: #d9dce8;
-
-    --color-slate-100: #1a1a1a;
-    --color-slate-200: #3a3a3a;
-    --color-slate-400: #6b7280;
-    --color-slate-500: #9ca3af;
-    --color-slate-600: #d1d5db;
-
-    --color-cyan-950: #ecf7f9;
-
-    --shadow-card: 0 1px 0 0 rgb(0 0 0 / 0.03), 0 0 0 1px rgb(0 0 0 / 0.02);
-    --shadow-raised: 0 4px 16px rgb(0 0 0 / 0.1), 0 0 0 1px rgb(0 0 0 / 0.03);
-    --shadow-overlay:
-      0 30px 80px rgb(0 0 0 / 0.15), 0 0 0 1px rgb(103 232 249 / 0.1);
-  }
-}
 
 /* Blinking block cursor used in the terminal / mono showcase. */
 @keyframes cursor {
@@ -133,22 +83,7 @@
 @layer base {
   :root,
   html {
-    color-scheme: light dark;
-  }
-
-  @media (prefers-color-scheme: light) {
-    :root,
-    html {
-      color-scheme: light;
-    }
-  }
-
-  [data-theme="dark"] {
     color-scheme: dark;
-  }
-
-  [data-theme="light"] {
-    color-scheme: light;
   }
 
   html,

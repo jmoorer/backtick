@@ -1,42 +1,29 @@
 <script lang="ts">
-  import Icons from './icons.svelte';
+  import type { Visibility } from "$lib/schemas";
+  import Chip from "./ui/chip.svelte";
+  import Icons from "./ui/icons.svelte";
 
   interface Props {
-    visibility: 'public' | 'locked';
+    visibility: Visibility;
     onclick?: (e: MouseEvent) => void;
   }
 
   let { visibility, onclick }: Props = $props();
+
+  const variant = $derived(visibility === "public" ? "success" : "default");
 </script>
 
-<button
-  class="ui-chip"
-  class:ui-chip-success={visibility === 'public'}
-  class:ui-chip-warn={visibility === 'locked'}
-  {onclick}
->
-  {#if visibility === 'public'}
+<Chip {variant} {onclick}>
+  {#if visibility === "public"}
     <span class="dot"></span>
     public
-  {:else}
-    <Icons name="lock" size={11} />
-    locked
+  {:else if visibility === "private"}
+    <Icons name="eye-off" size={11} />
+    private
   {/if}
-</button>
+</Chip>
 
 <style>
-  button {
-    cursor: pointer;
-    transition:
-      background-color 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      border-color 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  button:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-glow);
-  }
-
   .dot {
     width: 6px;
     height: 6px;

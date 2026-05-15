@@ -5,14 +5,35 @@
 
   import { EXAMPLE_MARKDOWN } from "$lib/constants";
   import Toolbar from "$lib/components/toolbar.svelte";
-  let markdown = $state(EXAMPLE_MARKDOWN);
+  import type { PasteFormData } from "$lib/schemas";
+
+  import toast, { Toaster } from "svelte-french-toast";
+  import { delay } from "$lib/utils";
+
+  let pasteForm = $state<PasteFormData>({
+    content: EXAMPLE_MARKDOWN,
+    extension: "md",
+    visibility: "public",
+    password: "",
+    expiry: "1d",
+  });
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(pasteForm.content).then(
+      () => {
+        toast.success("Text copied to clipboard");
+      },
+      (err) => {
+        toast.error("Could not copy text: ", err);
+      },
+    );
+  }
+  async function publish() {
+    await delay(1000); // Simulate API delay
+    toast.success("Paste published successfully");
+  }
 </script>
 
-<!-- <h1>Welcome to SvelteKit</h1>
-<p>
-  Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the
-  documentation
-</p> -->
 {#snippet header(name: string)}
   <div
     class="bg-ink-800 px-4 py-2 flex items-center gap-2 border-b border-ink-500"
@@ -21,33 +42,27 @@
   </div>
 {/snippet}
 
-<!-- <div class="grid grid-cols-2 flex-1">
-
-  <div class="border-r border-ink-500 flex flex-col">
-    {@render header("Markdown")}
-    <Editor bind:text />
-  </div>
-  <div class="flex flex-col">
-    {@render header("Preview")}
-    <Preview markdown={text} />
-  </div>
-</div> -->
-
 <Splitpanes class="flex-1 pane">
   <Pane minSize={20}>
     <div class="flex flex-col h-full bg-ink-800">
       {@render header("Markdown")}
-      <Editor bind:text={markdown} />
+      <Editor bind:text={pasteForm.content} />
     </div>
   </Pane>
   <Pane minSize={20}>
     <div class="flex flex-col h-full bg-ink-800">
       {@render header("Preview")}
-      <Preview {markdown} />
+      <Preview markdown={pasteForm.content} />
     </div>
   </Pane>
 </Splitpanes>
-<Toolbar />
+<Toolbar
+  bind:visibility={pasteForm.visibility}
+  bind:password={pasteForm.password}
+  bind:expiry={pasteForm.expiry}
+  oncopy={copyToClipboard}
+  onpublish={publish}
+/>
 
 <style lang="css">
   :global(.splitpanes.default-theme .splitpanes__splitter) {

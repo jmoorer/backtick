@@ -2,6 +2,7 @@
   import "./layout.css";
   import favicon from "$lib/assets/favicon.svg";
   import AppHeader from "$lib/components/app-header.svelte";
+  import { Toaster } from "svelte-french-toast";
 
   let { children } = $props();
 </script>
@@ -22,3 +23,4 @@
     {@render children()}
   </div>
 </div>
+<Toaster />

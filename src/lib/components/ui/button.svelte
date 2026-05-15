@@ -9,8 +9,11 @@
     | "nav"
     | "nav-active";
 
+  type Size = "sm" | "md" | "lg";
+
   interface Props {
     variant?: Variant;
+    size?: Size;
     type?: "button" | "submit" | "reset";
     disabled?: boolean;
     href?: string;
@@ -20,6 +23,7 @@
 
   let {
     variant = "secondary",
+    size = "md",
     type = "button",
     disabled = false,
     href = undefined,
@@ -31,7 +35,7 @@
 {#if href}
   <a
     {href}
-    class="btn btn--{variant}"
+    class="btn btn--{variant} btn--{size}"
     class:btn--disabled={disabled}
     aria-disabled={disabled}
     role="button"
@@ -42,7 +46,7 @@
   <button
     {type}
     {disabled}
-    class="btn btn--{variant}"
+    class="btn btn--{variant} btn--{size}"
     class:btn--disabled={disabled}
     {onclick}
   >
@@ -158,6 +162,17 @@
     padding: 0.25rem 0.75rem;
     border-radius: var(--radius-md);
     background: rgb(103 232 249 / 0.06);
+  }
+
+  /* ── Sizes (override variant padding + font-size) ───────────── */
+  .btn--sm {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+  }
+
+  .btn--lg {
+    font-size: 1rem;
+    padding: 0.625rem 1.25rem;
   }
 
   /* ── Disabled state ─────────────────────────────────────────── */

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  let theme: "light" | "dark" | "system" = "system";
-  let mounted = false;
+  let theme = $state<"light" | "dark" | "system">("system");
+  let mounted = $state(false);
 
   onMount(() => {
     mounted = true;
@@ -41,7 +41,7 @@
 </script>
 
 <button
-  on:click={toggleTheme}
+  onclick={toggleTheme}
   title={theme === "system"
     ? "Using system preference. Click to toggle."
     : `Current theme: ${theme}. Click to toggle.`}
@@ -49,7 +49,7 @@
   aria-label="Toggle theme"
 >
   {#if !mounted}
-    <div class="icon" />
+    <div class="icon"></div>
   {:else if theme === "system"}
     {#if window.matchMedia("(prefers-color-scheme: dark)").matches}
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">

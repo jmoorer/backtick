@@ -1,6 +1,6 @@
 <script lang="ts">
   interface Props {
-    name: 'copy' | 'check' | 'settings' | 'eye' | 'eye-off' | 'link' | 'trash' | 'lock' | 'unlock';
+    name: 'copy' | 'check' | 'settings' | 'eye' | 'eye-off' | 'link' | 'trash' | 'lock' | 'unlock' | 'clock';
     size?: number;
     'aria-hidden'?: boolean;
   }
@@ -48,5 +48,8 @@
   {:else if name === 'unlock'}
     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
     <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+  {:else if name === 'clock'}
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
   {/if}
 </svg>

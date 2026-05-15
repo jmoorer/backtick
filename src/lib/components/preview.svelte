@@ -3,13 +3,8 @@
 
   import MarkdownIt from "markdown-it";
 
-  $effect(() => {
-    console.log({ markdown });
-  });
-
   const md = new MarkdownIt();
 
-  //let html = $derived(processor.processSync(markdown).toString());
   let html = $state("");
 
   let height = $state(0);
