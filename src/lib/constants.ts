@@ -1,3 +1,6 @@
+export const DELETION_TOKEN_LENGTH = 32;
+export const SHORT_ID_LENGTH = 8;
+
 export const EXAMPLE_MARKDOWN = `# Markdown Showcase
 
 ## Introduction

@@ -55,7 +55,7 @@ export const EXPIRY_MS: Record<ExpiryOption, number | null> = {
   never: null,
 };
 
-const PasteFormDataSchema = z.object({
+export const PasteFormDataSchema = z.object({
   title: z.string().max(200).optional(),
   content: z.string().min(1).max(500_000),
   extension: z.string().max(20).optional(),

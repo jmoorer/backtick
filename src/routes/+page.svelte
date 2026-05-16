@@ -10,6 +10,9 @@
   import toast, { Toaster } from "svelte-french-toast";
   import { delay } from "$lib/utils";
   import { createScrollSync } from "$lib/state/scroll.svelte";
+  import { createPaste } from "$lib/pastes.remote";
+  import { goto } from "$app/navigation";
+  import { tokenService } from "$lib/tokens";
 
   let pasteForm = $state<PasteFormData>({
     content: EXAMPLE_MARKDOWN,
@@ -30,7 +33,9 @@
     );
   }
   async function publish() {
-    await delay(1000); // Simulate API delay
+    const { short_id, delete_token } = await createPaste(pasteForm);
+    tokenService.saveToken(short_id, delete_token);
+    goto(`/${short_id}`);
     toast.success("Paste published successfully");
   }
   let scrollContext = createScrollSync();

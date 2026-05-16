@@ -11,6 +11,9 @@ const config = {
     },
   },
   kit: {
+    experimental: {
+      remoteFunctions: true,
+    },
     adapter: adapter(),
     typescript: {
       config: (config) => ({
