@@ -4,8 +4,6 @@ import * as schema from "./schema";
 import { env } from "$env/dynamic/private";
 import { building } from "$app/environment";
 
-console.log({ building });
-console.log({ env, nodeEnv: process.env });
 // if (!env.DATABASE_URL && !building) throw new Error("DATABASE_URL is not set");
 
 const client = postgres(env.DATABASE_URL);
