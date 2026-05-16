@@ -8,7 +8,6 @@ COPY .npmrc package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
-COPY .env .env
 RUN pnpm build
 
 # ── Runtime stage ───────────────────────────────────────────────────────────────
