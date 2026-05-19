@@ -1,6 +1,6 @@
 <script lang="ts">
   interface Props {
-    name: 'copy' | 'check' | 'settings' | 'eye' | 'eye-off' | 'link' | 'trash' | 'lock' | 'unlock' | 'clock' | 'plus';
+    name: 'copy' | 'check' | 'settings' | 'eye' | 'eye-off' | 'link' | 'trash' | 'lock' | 'unlock' | 'clock' | 'plus' | 'code';
     size?: number;
     'aria-hidden'?: boolean;
   }
@@ -54,5 +54,8 @@
   {:else if name === 'plus'}
     <line x1="12" y1="5" x2="12" y2="19" />
     <line x1="5" y1="12" x2="19" y2="12" />
+  {:else if name === 'code'}
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
   {/if}
 </svg>

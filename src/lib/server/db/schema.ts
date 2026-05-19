@@ -1,11 +1,11 @@
-import { pgTable, serial, integer, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, boolean, integer, text, timestamp } from "drizzle-orm/pg-core";
 
 export const pastes = pgTable("pastes", {
   id: text("id").primaryKey(),
   short_id: text("short_id").notNull().unique(),
   content: text("content").notNull(),
   title: text("title"),
-  is_public: integer("is_public").notNull().default(1), // boolean as int
+  is_public: boolean("is_public").notNull().default(true),
   password_hash: text("password_hash"),
   delete_token: text("delete_token").notNull(),
   expires_at: timestamp("expires_at", { withTimezone: true }),

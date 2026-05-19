@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
+  import type { MouseEventHandler } from "svelte/elements";
 
   type Variant =
     | "primary"
@@ -17,7 +18,7 @@
     type?: "button" | "submit" | "reset";
     disabled?: boolean;
     href?: string;
-    onclick?: (e: MouseEvent) => void;
+    onclick?: MouseEventHandler<HTMLButtonElement>;
     children: Snippet;
   }
 

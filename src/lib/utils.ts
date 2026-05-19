@@ -97,3 +97,36 @@ export function deriveTitle(markdown: string): string | null {
   // 3 — Nothing usable
   return null;
 }
+
+/** Formats a Date as "May 10, 2026" or "May 10, 2026, 3:42 PM" when `time` is true. */
+export function formatDate(date: Date, time = false): string {
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    ...(time && { hour: "numeric", minute: "2-digit" }),
+  });
+}
+
+/** Returns a compact TTL label for a paste's expiry date.
+ *  null → "∞"  |  past → "expired"  |  future → "6d" / "23h" / "45min" */
+export function formatTtl(expiresAt: Date | null): string {
+  if (!expiresAt) return "∞";
+  const ms = expiresAt.getTime() - Date.now();
+  if (ms <= 0) return "expired";
+  const min = Math.floor(ms / 60_000);
+  const h = Math.floor(ms / 3_600_000);
+  const d = Math.floor(ms / 86_400_000);
+  if (d >= 1) return `${d}d`;
+  if (h >= 1) return `${h}h`;
+  return `${min}min`;
+}
+export function getContentLength(content: string) {
+  const bytes = new TextEncoder().encode(content).byteLength;
+  return formatBytes(bytes);
+}
+export function formatBytes(bytes: number) {
+  if (bytes < 1024) return `${bytes} bytes`;
+  if (bytes < 1048576) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / 1048576).toFixed(1)} MB`;
+}

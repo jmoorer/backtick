@@ -23,4 +23,5 @@ export async function load({ params }) {
       pasteExpiresAt: paste.expires_at.toISOString(),
     });
   }
+  return { paste };
 }

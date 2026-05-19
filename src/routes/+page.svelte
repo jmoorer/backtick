@@ -4,7 +4,7 @@
   import { Pane, Splitpanes } from "svelte-splitpanes";
 
   import { EXAMPLE_MARKDOWN } from "$lib/constants";
-  import Toolbar from "$lib/components/toolbar.svelte";
+  import SettingsToolbar from "$lib/components/settings-toolbar.svelte";
   import type { PasteFormData } from "$lib/schemas";
 
   import toast, { Toaster } from "svelte-french-toast";
@@ -63,7 +63,7 @@
     </div>
   </Pane>
 </Splitpanes>
-<Toolbar
+<SettingsToolbar
   bind:visibility={pasteForm.visibility}
   bind:password={pasteForm.password}
   bind:expiry={pasteForm.expiry}
