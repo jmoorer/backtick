@@ -1,42 +1,63 @@
-# sv
+# backtick
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A self-hostable Markdown pastebin with a split-pane editor and live preview. Built with SvelteKit, TypeScript, Drizzle ORM, and PostgreSQL.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Split-pane editor** — write Markdown on the left, rendered preview on the right with scroll sync
+- **Syntax highlighting** — code blocks with language-aware highlighting
+- **Visibility control** — public, private, or password-protected pastes
+- **Expiry** — configurable TTL per paste (or never expires)
+- **Short IDs** — every paste gets a short URL (e.g. `/abc123`)
+- **Raw view** — plain text at `/:id/raw`
+- **Delete tokens** — client-side token stored in `localStorage`; only the creator can remove a paste
+- **View count** — tracks how many times a paste has been viewed
 
-```sh
-# create a new project
-npx sv create my-app
+## Stack
+
+| Layer    | Tech                         |
+|----------|------------------------------|
+| Frontend | SvelteKit 5 + Svelte 5 runes |
+| Styling  | Tailwind CSS v4              |
+| Database | PostgreSQL via Drizzle ORM   |
+| Runtime  | Node.js (adapter-node)       |
+| Deploy   | Docker + Docker Compose      |
+
+## Prerequisites
+
+- Node.js 20+
+- pnpm
+- PostgreSQL (or use the included Docker Compose setup)
+
+## Setup
+
+```bash
+pnpm install
+
+# Copy env template and fill in your DATABASE_URL
+cp .env.example .env
+
+# Push schema to the database
+pnpm db:push
+
+pnpm dev
 ```
 
-To recreate this project with the same configuration:
+With Docker:
 
-```sh
-# recreate this project
-pnpm dlx sv@0.15.3 create --template minimal --types ts --add tailwindcss="plugins:typography" sveltekit-adapter="adapter:node" drizzle="database:postgresql+postgresql:postgres.js+docker:yes" --install pnpm backtick
+```bash
+docker compose up
 ```
 
-## Developing
+## Environment variables
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+| Variable       | Description                  |
+|----------------|------------------------------|
+| `DATABASE_URL` | PostgreSQL connection string |
 
 ## Building
 
-To create a production version of your app:
-
-```sh
-npm run build
+```bash
+pnpm build
+pnpm preview
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
